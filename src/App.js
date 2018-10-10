@@ -8,7 +8,7 @@ class App extends Component {
     this.state = {
       items: [{
         name: "item-A",
-        weight: 0.5,
+        type: 0.5,
         type: "solid"
       },
       {
