@@ -30,14 +30,36 @@ class App extends Component {
     })
   }
 
+
   render() {
+
     return (
       <div className="App">
         <header className="App-header">
-          <h1>This is a list of items</h1>
+          <h1>Agile Kanban Board</h1>
         </header>
-        <ItemList items={this.state.items} />
-        <ItemForm addItem={this.addItemToInventory} />
+        <section className="content">
+          <div className="columns">
+            <header className="assignedColumn">
+              <h1>Assigned</h1>
+              <hr />
+              <ItemList items={this.state.items} />
+            </header>
+            <header className="activeColumn">
+              <h1>Active</h1>
+              <hr />
+              <ItemList items={this.state.items} />
+            </header>
+            <header className="reviewColumn">
+              <h1>In Review</h1>
+              <hr />
+              <ItemList items={this.state.items} />
+            </header>
+          </div>
+        </section>
+        <header className="formClass-header">
+          <ItemForm addItem={this.addItemToInventory} />
+        </header>
       </div>
     )
   }
@@ -45,7 +67,7 @@ class App extends Component {
 
 
 function ItemList(props) {
-  return props.items.map(item => <Item name={item.name} />)
+  return props.items.map(item => <div className="listItem"><Item name={item.name} /></div>)
 }
 
 function Item(props) {
@@ -95,14 +117,15 @@ class ItemForm extends Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <label> Name:
-          <input onChange={this.handleChange} type="text" name="name" />
+        <h1>Create Ticket</h1>
+        <label className="labelClass">
+          <input onChange={this.handleChange} type="text" name="name" value="Name" />
         </label>
-        <label> Weight:
-        <input onChange={this.handleChange} type="text" name="weight" />
+        <label>
+          <input onChange={this.handleChange} type="text" name="weight" value="Weight" />
         </label>
-        <label> Type:
-          <select onChange={this.handleChange} name="type">
+        <label>
+          <select onChange={this.handleChange} name="type" value="Type">
             <option value="solid">Solid</option>
             <option value="liquid">Liquid</option>
             <option value="gas">Gas</option>
