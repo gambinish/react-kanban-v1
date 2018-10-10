@@ -24,6 +24,12 @@ class App extends Component {
     }
   }
 
+  addItemToInventory = (item) => {
+    this.setState(state => {
+      return { items: [...state.items, item] }
+    })
+  }
+
   render() {
     return (
       <div className="App">
@@ -31,16 +37,12 @@ class App extends Component {
           <h1>This is a list of items</h1>
         </header>
         <ItemList items={this.state.items} />
-        <ItemForm />
+        <ItemForm addItem={this.addItemToInventory} />
       </div>
     )
   }
 }
 
-// this returns all props items the same way
-// function ItemList(props) {
-//   return props.items.map(item => <div>{item.name} {item.type}</div>)
-// }
 
 function ItemList(props) {
   return props.items.map(item => <Item name={item.name} />)
@@ -63,6 +65,7 @@ class ItemForm extends Component {
   handleSubmit = (submit) => {
     submit.preventDefault()
     console.log('form submitted', this.state)
+    this.props.addItem(this.state)
   }
 
   handleChange = (field) => {
