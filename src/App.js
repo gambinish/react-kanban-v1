@@ -34,7 +34,7 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <h1>This is a list of items!</h1>
+          <h1>This is a list of items</h1>
         </header>
         <ItemList items={this.state.items} />
         <ItemForm addItem={this.addItemToInventory} />
