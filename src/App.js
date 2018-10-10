@@ -5,46 +5,23 @@ import './App.css';
 class App extends Component {
   constructor(props) {
     super(props)
-  }
-
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          {/* <h1 className="App-title">Hello Universe!</h1> */}
-          <Title name="this is a configurable component" property2={2 * 2} />
-        </header>
-      </div>
-    );
-  }
-}
-
-
-class Title extends Component {
-  constructor(props) {
-    super(props)
     this.state = {
       items: [{
-        id: 1,
-        name: 'item-A',
-        weight: 0.1,
-        type: 'solid'
-      },
-      {
-        id: 2,
-        name: 'item-B',
+        name: "item-A",
         weight: 0.5,
-        type: 'liquid'
+        type: "solid"
       },
       {
-        id: 3,
-        name: 'item-C',
-        weight: 0.75,
-        type: 'gas'
+        name: "item-B",
+        weight: 0.25,
+        type: "liquid"
+      },
+      {
+        name: "item-C",
+        weight: 0.1,
+        type: "gas"
       }]
     }
-    // this.decrement = this.decrement.bind(this)
-    // this.increment = this.increment.bind(this)
   }
 
   render() {
@@ -54,6 +31,7 @@ class Title extends Component {
           <h1>This is a list of items</h1>
         </header>
         <ItemList items={this.state.items} />
+        <ItemForm />
       </div>
     )
   }
@@ -70,6 +48,67 @@ function ItemList(props) {
 
 function Item(props) {
   return <div>{props.name}</div>
+}
+
+class ItemForm extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      name: null,
+      weight: null,
+      type: null
+    }
+  }
+
+  handleSubmit = (submit) => {
+    submit.preventDefault()
+    console.log('form submitted', this.state)
+  }
+
+  handleChange = (field) => {
+    field.preventDefault()
+    console.log('field change detected: ', field.target.name)
+    console.log('value change detected: ', field.target.value)
+    // if (field.target.name === 'name') {
+    //   this.setState({ 'name': field.target.value }, function () {
+    //     console.log('name field after submission', this.state)
+    //   })
+    // } else if (field.target.name === 'weight') {
+    //   this.setState({ 'weight': field.target.value }, function () {
+    //     console.log('weight field after submission', this.state)
+    //   })
+    // } else if (field.target.name === 'type') {
+    //   this.setState({ 'type': field.target.value }, function () {
+    //     console.log('type field after submission', this.state)
+    //   })
+    //   }
+    // }
+    const { name, value } = field.target
+    this.setState({
+      [name]: value
+    })
+  }
+
+  render() {
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <label> Name:
+          <input onChange={this.handleChange} type="text" name="name" />
+        </label>
+        <label> Weight:
+        <input onChange={this.handleChange} type="text" name="weight" />
+        </label>
+        <label> Type:
+          <select onChange={this.handleChange} name="type">
+            <option value="solid">Solid</option>
+            <option value="liquid">Liquid</option>
+            <option value="gas">Gas</option>
+          </select>
+        </label>
+        <input type="submit" />
+      </form>
+    )
+  }
 }
 
 
