@@ -9,17 +9,20 @@ class App extends Component {
       items: [{
         name: "item-A",
         type: 0.5,
-        type: "solid"
+        type: "solid",
+        status: 'assigned'
       },
       {
         name: "item-B",
         weight: 0.25,
-        type: "liquid"
+        type: "liquid",
+        status: 'active'
       },
       {
         name: "item-C",
         weight: 0.1,
-        type: "gas"
+        type: "gas",
+        status: 'inReview'
       }]
     }
   }
@@ -29,7 +32,6 @@ class App extends Component {
       return { items: [...state.items, item] }
     })
   }
-
 
   render() {
 
@@ -43,17 +45,17 @@ class App extends Component {
             <header className="assignedColumn">
               <h1>Assigned</h1>
               <hr />
-              <ItemList items={this.state.items} />
+              <ItemList id='assigned' items={this.state.items} />
             </header>
             <header className="activeColumn">
               <h1>Active</h1>
               <hr />
-              <ItemList items={this.state.items} />
+              <ItemList id='active' items={this.state.items} />
             </header>
             <header className="reviewColumn">
               <h1>In Review</h1>
               <hr />
-              <ItemList items={this.state.items} />
+              <ItemList id='inReview' items={this.state.items} />
             </header>
           </div>
         </section>
@@ -67,11 +69,60 @@ class App extends Component {
 
 
 function ItemList(props) {
-  return props.items.map(item => <div className="listItem"><Item name={item.name} /></div>)
+  console.log('ItemList Id: ', typeof props.id, props.id)
+  console.log('ItemStatus: ', props.items.map(itemStatus => itemStatus.status))
+
+  // return props.items.map(item => <div className="listItem"><Item name={item.name} status={item.status} /></div>)
+
+  // props.items.forEach(function (element) {
+  //   console.log('ticketStatus: ', element.status)
+  // })
+
+  props.items.forEach((ticket) => {
+    console.log('ticket: ', ticket);
+  });
+
+  if (props.id === props.items[2].status) {
+    console.log(true)
+    return <div className="listItem"><Item name={props.items[2].name} status={props.items[2].status} /></div>
+  } else {
+    console.log(false)
+    return null
+  }
+
+  // props.items.forEach((ticket) => {
+  //   if (props.id === ticket.status) {
+  //     console.log(true)
+  //     return <div className="listItem"><Item name={ticket.name} status={ticket.status} /></div>
+  //   } else {
+  //     console.log(false)
+  //     return null
+  //   }
+  // })
+
 }
 
+// class ItemList extends Component {
+//   constructor(props) {
+//     super(props)
+//     this.state = {
+
+//     }
+//   }
+
+//   orderTickets = () => {
+
+//   }
+
+//   render() {
+//     return (
+//       this.props.items.map(item => <div className="listItem"><Item name={item.name} status={item.status} /></div>)
+//     )
+//   }
+// }
+
 function Item(props) {
-  return <div>{props.name}</div>
+  return <div>{props.name} <br /><br />  {props.status}</div>
 }
 
 class ItemForm extends Component {
@@ -80,7 +131,8 @@ class ItemForm extends Component {
     this.state = {
       name: null,
       weight: null,
-      type: null
+      type: null,
+      status: null
     }
   }
 
@@ -110,7 +162,8 @@ class ItemForm extends Component {
     // }
     const { name, value } = field.target
     this.setState({
-      [name]: value
+      [name]: value,
+      status: 'assigned'
     })
   }
 
@@ -119,13 +172,13 @@ class ItemForm extends Component {
       <form onSubmit={this.handleSubmit}>
         <h1>Create Ticket</h1>
         <label className="labelClass">
-          <input onChange={this.handleChange} type="text" name="name" value="Name" />
+          <input onChange={this.handleChange} type="text" name="name" placeholder="Name" />
         </label>
         <label>
-          <input onChange={this.handleChange} type="text" name="weight" value="Weight" />
+          <input onChange={this.handleChange} type="text" name="weight" placeholder="Weight" />
         </label>
         <label>
-          <select onChange={this.handleChange} name="type" value="Type">
+          <select onChange={this.handleChange} name="type" placeholder="Type">
             <option value="solid">Solid</option>
             <option value="liquid">Liquid</option>
             <option value="gas">Gas</option>
