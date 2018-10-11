@@ -38,24 +38,24 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <h1>Agile Kanban Board</h1>
+          <h1>Kanban Board</h1>
         </header>
         <section className="content">
           <div className="columns">
             <header className="assignedColumn">
               <h1>Assigned</h1>
               <hr />
-              <ItemList id='assigned' items={this.state.items} />
+              <AssignedList items={this.state.items} />
             </header>
             <header className="activeColumn">
               <h1>Active</h1>
               <hr />
-              <ItemList id='active' items={this.state.items} />
+              <ActiveList items={this.state.items} />
             </header>
             <header className="reviewColumn">
               <h1>In Review</h1>
               <hr />
-              <ItemList id='inReview' items={this.state.items} />
+              <ReviewList items={this.state.items} />
             </header>
           </div>
         </section>
@@ -68,60 +68,34 @@ class App extends Component {
 }
 
 
-function ItemList(props) {
-  console.log('ItemList Id: ', typeof props.id, props.id)
-  console.log('ItemStatus: ', props.items.map(itemStatus => itemStatus.status))
-
-  // return props.items.map(item => <div className="listItem"><Item name={item.name} status={item.status} /></div>)
-
-  // props.items.forEach(function (element) {
-  //   console.log('ticketStatus: ', element.status)
-  // })
-
-  props.items.forEach((ticket) => {
-    console.log('ticket: ', ticket);
-  });
-
-  if (props.id === props.items[2].status) {
-    console.log(true)
-    return <div className="listItem"><Item name={props.items[2].name} status={props.items[2].status} /></div>
-  } else {
-    console.log(false)
-    return null
-  }
-
-  // props.items.forEach((ticket) => {
-  //   if (props.id === ticket.status) {
-  //     console.log(true)
-  //     return <div className="listItem"><Item name={ticket.name} status={ticket.status} /></div>
-  //   } else {
-  //     console.log(false)
-  //     return null
-  //   }
-  // })
-
+function AssignedList(props) {
+  return props.items.filter((item) => {
+    return item.status === 'assigned'
+  }).map(item => {
+    return (<div className='listItem'><Item name={item.name} status={item.status} /></div>)
+  })
 }
 
-// class ItemList extends Component {
-//   constructor(props) {
-//     super(props)
-//     this.state = {
+function ActiveList(props) {
+  return props.items.filter((item) => {
+    return item.status === 'active'
+  }).map(item => {
+    return (<div className='listItem'><Item name={item.name} status={item.status} /></div>)
+  })
+}
 
-//     }
-//   }
+function ReviewList(props) {
+  return props.items.filter((item) => {
+    return item.status === 'inReview'
+  }).map(item => {
+    return (<div className='listItem'><Item name={item.name} status={item.status} /></div>)
+  })
+}
 
-//   orderTickets = () => {
 
-//   }
-
-//   render() {
-//     return (
-//       this.props.items.map(item => <div className="listItem"><Item name={item.name} status={item.status} /></div>)
-//     )
-//   }
-// }
 
 function Item(props) {
+  console.log('Item props: ', props)
   return <div>{props.name} <br /><br />  {props.status}</div>
 }
 
@@ -189,12 +163,6 @@ class ItemForm extends Component {
     )
   }
 }
-
-
-
-
-
-
 // const Title = (props) => <h1>{props.name}</h1>
 
 export default App;

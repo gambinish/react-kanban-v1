@@ -53,6 +53,7 @@
 
 .listItem {
   border: solid black 2px;
+  border-radius: 25px;
   margin: auto;
   margin-top: 2.5px;
   margin-bottom: 2.5px;
