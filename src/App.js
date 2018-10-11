@@ -92,8 +92,6 @@ function ReviewList(props) {
   })
 }
 
-
-
 function Item(props) {
   console.log('Item props: ', props)
   return <div>{props.name} <br /><br />  {props.status}</div>
@@ -105,7 +103,6 @@ class ItemForm extends Component {
     this.state = {
       name: null,
       weight: null,
-      type: null,
       status: null
     }
   }
@@ -118,26 +115,9 @@ class ItemForm extends Component {
 
   handleChange = (field) => {
     field.preventDefault()
-    console.log('field change detected: ', field.target.name)
-    console.log('value change detected: ', field.target.value)
-    // if (field.target.name === 'name') {
-    //   this.setState({ 'name': field.target.value }, function () {
-    //     console.log('name field after submission', this.state)
-    //   })
-    // } else if (field.target.name === 'weight') {
-    //   this.setState({ 'weight': field.target.value }, function () {
-    //     console.log('weight field after submission', this.state)
-    //   })
-    // } else if (field.target.name === 'type') {
-    //   this.setState({ 'type': field.target.value }, function () {
-    //     console.log('type field after submission', this.state)
-    //   })
-    //   }
-    // }
     const { name, value } = field.target
     this.setState({
-      [name]: value,
-      status: 'assigned'
+      [name]: value
     })
   }
 
@@ -152,17 +132,19 @@ class ItemForm extends Component {
           <input onChange={this.handleChange} type="text" name="weight" placeholder="Weight" />
         </label>
         <label>
-          <select onChange={this.handleChange} name="type" placeholder="Type">
-            <option value="solid">Solid</option>
-            <option value="liquid">Liquid</option>
-            <option value="gas">Gas</option>
-          </select>
+          <input onChange={this.handleChange} type="text" name="status" placeholder="Status" />
         </label>
+        {/* <label>
+          <select onChange={this.handleChange} name="status" placeholder="Type">
+            <option value="assigned">Assigned</option>
+            <option value="active">Active</option>
+            <option value="inReview">In Review</option>
+          </select>
+        </label> */}
         <input type="submit" />
       </form>
     )
   }
 }
-// const Title = (props) => <h1>{props.name}</h1>
 
 export default App;
