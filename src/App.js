@@ -1,25 +1,28 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
+import axios from 'axios';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      // items: []
       items: [{
-        name: "item-A",
+        name: "react-A",
         type: 0.5,
         type: "solid",
         status: 'assigned'
       },
       {
-        name: "item-B",
+        name: "react-B",
         weight: 0.25,
         type: "liquid",
         status: 'active'
       },
       {
-        name: "item-C",
+        name: "react-C",
         weight: 0.1,
         type: "gas",
         status: 'inReview'
@@ -28,9 +31,32 @@ class App extends Component {
   }
 
   addItemToInventory = (item) => {
-    this.setState(state => {
-      return { items: [...state.items, item] }
-    })
+    // this.setState(state => {
+    //   return { items: [...state.items, item] }
+    // })
+    axios
+      .get('/tickets')
+      .then(items => {
+        this.setState(state => {
+          return { items: [...state.items, item] }
+        })
+        console.log('items: ', items)
+      })
+      .catch(err => {
+        console.log('error: ', err)
+      })
+  }
+
+  componentDidMount = () => {
+    axios
+      .get('/tickets')
+      .then(items => {
+        console.log('items: ', items)
+        this.setState({ items: items.data })
+      })
+      .catch(err => {
+        console.log('error: ', err)
+      })
   }
 
   render() {
@@ -38,6 +64,14 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
+          <Router>
+            <div>
+              <Link className="App-title" to="/assigned">Assigned</Link>
+              <Route path="/assigned" component={() => <AssignedList items={this.state.items} />} />
+              <Route path="/tickets" component={() => <ActiveList items={this.state.items} />} />
+
+            </div>
+          </Router>
           <h1>Kanban Board</h1>
         </header>
         <section className="content">

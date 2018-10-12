@@ -5,9 +5,9 @@ exports.seed = function (knex, Promise) {
     .then(function () {
       // Inserts seed entries
       return knex('ticketsTable').insert([
-        { name: 'item-A', type: 'back end', description: '', status: 'assigned' },
-        { name: 'item-B', type: 'front end', description: '', status: 'active' },
-        { name: 'item-C', type: 'project management', description: '', status: 'inReview' }
+        { name: 'postgres-A', type: 'back end', description: '', status: 'assigned' },
+        { name: 'postgres-B', type: 'front end', description: '', status: 'active' },
+        { name: 'postgtres-C', type: 'project management', description: '', status: 'inReview' }
       ]);
     });
 };
