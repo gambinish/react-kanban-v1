@@ -1,32 +1,15 @@
 import React, { Component } from 'react';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 // import logo from './logo.svg';
 import './App.css';
-import axios from 'axios';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import axios from 'axios';
 
 class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      // items: []
-      items: [{
-        name: "react-A",
-        type: 0.5,
-        type: "solid",
-        status: 'assigned'
-      },
-      {
-        name: "react-B",
-        weight: 0.25,
-        type: "liquid",
-        status: 'active'
-      },
-      {
-        name: "react-C",
-        weight: 0.1,
-        type: "gas",
-        status: 'inReview'
-      }]
+      items: []
     }
   }
 
@@ -47,47 +30,78 @@ class App extends Component {
       })
   }
 
-  componentDidMount = () => {
+  // componentDidMount = () => {
+  //   axios
+  //     .get('/tickets')
+  //     .then(items => {
+  //       console.log('items: ', items)
+  //       this.setState({ items: items.data })
+  //     })
+  //     .catch(err => {
+  //       console.log('error: ', err)
+  //     })
+  // }
+
+  componentDidMount() {
     axios
-      .get('/tickets')
+      .get('http://localhost:8989/tickets')
       .then(items => {
-        console.log('items: ', items)
+        console.log("items", items)
         this.setState({ items: items.data })
+        console.log(this.state.items)
       })
       .catch(err => {
-        console.log('error: ', err)
+        console.log('err', err)
       })
   }
+
+  // renderItemList() {
+  //   if (this.state.hasItems) {
+  //     return <AssignedList items={this.state.items} />
+  //   } else {
+  //     return null
+  //   }
+  // }
 
   render() {
 
     return (
       <div className="App">
         <header className="App-header">
-          <Router>
-            <div>
-              <Link className="App-title" to="/assigned">Assigned</Link>
-              <Route path="/assigned" component={() => <AssignedList items={this.state.items} />} />
-              <Route path="/tickets" component={() => <ActiveList items={this.state.items} />} />
-
-            </div>
-          </Router>
           <h1>Kanban Board</h1>
         </header>
         <section className="content">
           <div className="columns">
             <header className="assignedColumn">
               <h1>Assigned</h1>
+              <Router>
+                <div>
+                  <Link className="App-title" to="/assigned">Show</Link>
+                  <Route path="/assigned" component={() => <AssignedList items={this.state.items} />} />
+                </div>
+              </Router>
               <hr />
               <AssignedList items={this.state.items} />
             </header>
             <header className="activeColumn">
               <h1>Active</h1>
+              <Router>
+                <div>
+                  <Link className="App-title" to="/active">Show</Link>
+                  <Route path="/active" component={() => <ActiveList items={this.state.items} />} />
+                </div>
+              </Router>
               <hr />
               <ActiveList items={this.state.items} />
             </header>
             <header className="reviewColumn">
               <h1>In Review</h1>
+              <Router>
+                <div>
+                  <Link className="App-title" to="/review">Show</Link>
+                  <Route path="/review" component={() => <ReviewList items={this.state.items} />} />
+                </div>
+              </Router>
               <hr />
               <ReviewList items={this.state.items} />
             </header>
@@ -103,31 +117,46 @@ class App extends Component {
 
 
 function AssignedList(props) {
+
+  let styles = {
+    backgroundColor: '#33cc33'
+  }
+
   return props.items.filter((item) => {
     return item.status === 'assigned'
   }).map(item => {
-    return (<div className='listItem'><Item name={item.name} status={item.status} /></div>)
+    return (<div className='listItem' style={styles}><Item name={item.name} status={item.status} /></div>)
   })
 }
 
 function ActiveList(props) {
+
+  let styles = {
+    backgroundColor: '#627FEA'
+  }
+
   return props.items.filter((item) => {
     return item.status === 'active'
   }).map(item => {
-    return (<div className='listItem'><Item name={item.name} status={item.status} /></div>)
+    return (<div className='listItem' style={styles}><Item name={item.name} status={item.status} /></div>)
   })
 }
 
 function ReviewList(props) {
+
+  let styles = {
+    backgroundColor: 'orange'
+  }
+
   return props.items.filter((item) => {
     return item.status === 'inReview'
   }).map(item => {
-    return (<div className='listItem'><Item name={item.name} status={item.status} /></div>)
+    return (<div className='listItem' style={styles}><Item name={item.name} status={item.status} /></div>)
   })
 }
 
 function Item(props) {
-  console.log('Item props: ', props)
+  // console.log('Item props: ', props)
   return <div>{props.name} <br /><br />  {props.status}</div>
 }
 
@@ -149,10 +178,22 @@ class ItemForm extends Component {
 
   handleChange = (field) => {
     field.preventDefault()
-    const { name, value } = field.target
-    this.setState({
-      [name]: value
-    })
+    // const { name, value } = field.target
+    // this.setState({
+    //   [name]: value
+    // })
+    axios
+      .post('http://localhost:8989/')
+      .then(items => {
+        console.log("items", items)
+        // const { name, value } = field.target
+        // this.setState({
+        //   [name]: value
+        // })
+      })
+      .catch(err => {
+        console.log('err', err)
+      })
   }
 
   render() {

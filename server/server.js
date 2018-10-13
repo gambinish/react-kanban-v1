@@ -3,15 +3,15 @@ const app = express()
 const PORT = process.env.EXPRESS_CONTAINER_PORT || 9999
 const path = require('path')
 const Tickets = require('./db/models/Tickets.js')
-
-
+const cors = require('cors');
+app.use(cors())
 app.use(express.static(path.join(__dirname, '../build')))
 
-// app.get('/', (req, res) => {
-//   res.json('hello world')
-// })
-
 app.get('/', (req, res) => {
+  res.json('hello world')
+})
+
+app.get('/tickets', (req, res) => {
 
   Tickets
     .fetchAll()
