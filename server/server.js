@@ -7,11 +7,11 @@ const cors = require('cors');
 app.use(cors())
 app.use(express.static(path.join(__dirname, '../build')))
 
-app.get('/', (req, res) => {
-  res.json('hello world')
-})
+// app.get('/', (req, res) => {
+//   res.json('hello world')
+// })
 
-app.get('/tickets', (req, res) => {
+app.get('/', (req, res) => {
 
   Tickets
     .fetchAll()
