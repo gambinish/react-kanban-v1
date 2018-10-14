@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-// import logo from './logo.svg';
 import './App.css';
 // import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import axios from 'axios';
@@ -137,12 +136,6 @@ class App extends Component {
           <div className="columns">
             <header className="assignedColumn" id="assignedColId">
               <h1>Assigned</h1>
-              {/* <Router>
-                <div>
-                  <Link className="App-title" to="/assigned">Show</Link>
-                  <Route path="/assigned" component={() => <AssignedList items={this.state.items} />} />
-                </div>
-              </Router> */}
               <hr />
               <DragDropContext onDragEnd={this.onDragEnd}>
                 <Droppable droppableId="droppable">
@@ -173,12 +166,6 @@ class App extends Component {
             </header>
             <header className="activeColumn" id="activeColId">
               <h1>Active</h1>
-              {/* <Router>
-                <div>
-                  <Link className="App-title" to="/active">Show</Link>
-                  <Route path="/active" component={() => <ActiveList items={this.state.items} />} />
-                </div>
-              </Router> */}
               <hr />
               <DragDropContext onDragEnd={this.onDragEnd}>
                 <Droppable droppableId="droppable">
@@ -209,12 +196,6 @@ class App extends Component {
             </header>
             <header className="reviewColumn" id="reviewColId">
               <h1>In Review</h1>
-              {/* <Router>
-                <div>
-                  <Link className="App-title" to="/review">Show</Link>
-                  <Route path="/review" component={() => <ReviewList items={this.state.items} />} />
-                </div>
-              </Router> */}
               <hr />
               <DragDropContext onDragEnd={this.onDragEnd}>
                 <Droppable droppableId="droppable">
@@ -222,20 +203,22 @@ class App extends Component {
                     <div
                       ref={provided.innerRef}
                     >
-                      {this.state.items.map((item, index) => (
-                        <Draggable key={item.id} draggableId={item.id} index={index}>
-                          {(provided, snapshot) => (
-                            <div
-                              ref={provided.innerRef}
-                              {...provided.draggableProps}
-                              {...provided.dragHandleProps}
-                            >
-                              <ReviewList items={this.state.items} />
-                              {item.content}
-                            </div>
-                          )}
-                        </Draggable>
-                      ))}
+                      {
+                        this.state.items.map((item, index) => (
+                          <Draggable key={item.id} draggableId={item.id} index={index}>
+                            {(provided, snapshot) => (
+                              <div
+                                ref={provided.innerRef}
+                                {...provided.draggableProps}
+                                {...provided.dragHandleProps}
+                              >
+                                <ReviewList items={this.state.items} />
+                                {item.content}
+                              </div>
+                            )}
+                          </Draggable>
+                        ))
+                      }
                       {provided.placeholder}
                     </div>
                   )}
