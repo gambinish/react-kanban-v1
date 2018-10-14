@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 // import logo from './logo.svg';
 import './App.css';
 // import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
@@ -8,7 +8,7 @@ import axios from 'axios';
 
 ///////////////// IMPORT COMPONENTS //////////////
 
-// import ItemForm from './ItemForm.jsx';
+import ItemForm from './Forms/ItemForm.jsx';
 import AssignedList from './Lists/AssignedList.jsx';
 import ActiveList from './Lists/ActiveList.jsx';
 import ReviewList from './Lists/ReviewList.jsx';
@@ -144,7 +144,7 @@ class App extends Component {
                 </div>
               </Router> */}
               <hr />
-              {/* <DragDropContext onDragEnd={this.onDragEnd}>
+              <DragDropContext onDragEnd={this.onDragEnd}>
                 <Droppable droppableId="droppable">
                   {(provided, snapshot) => (
                     <div
@@ -168,8 +168,8 @@ class App extends Component {
                     </div>
                   )}
                 </Droppable>
-              </DragDropContext> */}
-              <AssignedList items={this.state.items} />
+              </DragDropContext>
+              {/* <AssignedList items={this.state.items} /> */}
             </header>
             <header className="activeColumn" id="activeColId">
               <h1>Active</h1>
@@ -180,7 +180,7 @@ class App extends Component {
                 </div>
               </Router> */}
               <hr />
-              {/* <DragDropContext onDragEnd={this.onDragEnd}>
+              <DragDropContext onDragEnd={this.onDragEnd}>
                 <Droppable droppableId="droppable">
                   {(provided, snapshot) => (
                     <div
@@ -204,8 +204,8 @@ class App extends Component {
                     </div>
                   )}
                 </Droppable>
-              </DragDropContext> */}
-              <ActiveList items={this.state.items} />
+              </DragDropContext>
+              {/* <ActiveList items={this.state.items} /> */}
             </header>
             <header className="reviewColumn" id="reviewColId">
               <h1>In Review</h1>
@@ -216,7 +216,7 @@ class App extends Component {
                 </div>
               </Router> */}
               <hr />
-              {/* <DragDropContext onDragEnd={this.onDragEnd}>
+              <DragDropContext onDragEnd={this.onDragEnd}>
                 <Droppable droppableId="droppable">
                   {(provided, snapshot) => (
                     <div
@@ -240,14 +240,14 @@ class App extends Component {
                     </div>
                   )}
                 </Droppable>
-              </DragDropContext> */}
-              <ReviewList items={this.state.items} />
+              </DragDropContext>
+              {/* <ReviewList items={this.state.items} /> */}
             </header>
           </div>
         </section>
-        {/* <header className="formClass-header">
+        <header className="formClass-header">
           <ItemForm addItem={this.addItemToInventory} />
-        </header> */}
+        </header>
       </div>
     )
   }
