@@ -1,38 +1,46 @@
 import React, { Component } from 'react';
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+// import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 // import logo from './logo.svg';
 import './App.css';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+// import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import axios from 'axios';
+
+
+///////////////// IMPORT COMPONENTS //////////////
+
+// import ItemForm from './ItemForm.jsx';
+import AssignedList from './Lists/AssignedList.jsx';
+import ActiveList from './Lists/ActiveList.jsx';
+import ReviewList from './Lists/ReviewList.jsx';
 
 ///////////////// DND /////////////////
 
 
 // a little function to help us with reordering the result
-const reorder = (list, startIndex, endIndex) => {
-  const result = Array.from(list);
-  const [removed] = result.splice(startIndex, 1);
-  result.splice(endIndex, 0, removed);
+// const reorder = (list, startIndex, endIndex) => {
+//   const result = Array.from(list);
+//   const [removed] = result.splice(startIndex, 1);
+//   result.splice(endIndex, 0, removed);
 
-  return result;
-};
+//   return result;
+// };
 
 /**
  * Moves an item from one list to another list.
  */
-const move = (source, destination, droppableSource, droppableDestination) => {
-  const sourceClone = Array.from(source);
-  const destClone = Array.from(destination);
-  const [removed] = sourceClone.splice(droppableSource.index, 1);
+// const move = (source, destination, droppableSource, droppableDestination) => {
+//   const sourceClone = Array.from(source);
+//   const destClone = Array.from(destination);
+//   const [removed] = sourceClone.splice(droppableSource.index, 1);
 
-  destClone.splice(droppableDestination.index, 0, removed);
+//   destClone.splice(droppableDestination.index, 0, removed);
 
-  const result = {};
-  result[droppableSource.droppableId] = sourceClone;
-  result[droppableDestination.droppableId] = destClone;
+//   const result = {};
+//   result[droppableSource.droppableId] = sourceClone;
+//   result[droppableDestination.droppableId] = destClone;
 
-  return result;
-};
+//   return result;
+// };
 
 ///////////////// DND /////////////////
 
@@ -44,12 +52,12 @@ class App extends Component {
     }
   }
 
-  id2List = {
-    droppable: 'items',
-    droppable2: 'selected'
-  };
+  // id2List = {
+  //   droppable: 'items',
+  //   droppable2: 'selected'
+  // };
 
-  getList = id => this.state[this.id2List[id]];
+  // getList = id => this.state[this.id2List[id]];
 
   componentDidMount() {
     axios
@@ -64,42 +72,42 @@ class App extends Component {
       })
   }
 
-  onDragEnd = result => {
-    const { source, destination } = result;
+  // onDragEnd = result => {
+  //   const { source, destination } = result;
 
-    // dropped outside the list
-    if (!destination) {
-      return;
-    }
+  //   // dropped outside the list
+  //   if (!destination) {
+  //     return;
+  //   }
 
-    if (source.droppableId === destination.droppableId) {
-      const items = reorder(
-        this.getList(source.droppableId),
-        source.index,
-        destination.index
-      );
+  //   if (source.droppableId === destination.droppableId) {
+  //     const items = reorder(
+  //       this.getList(source.droppableId),
+  //       source.index,
+  //       destination.index
+  //     );
 
-      let state = { items };
+  //     let state = { items };
 
-      if (source.droppableId === 'droppable2') {
-        state = { selected: items };
-      }
+  //     if (source.droppableId === 'droppable2') {
+  //       state = { selected: items };
+  //     }
 
-      this.setState(state);
-    } else {
-      const result = move(
-        this.getList(source.droppableId),
-        this.getList(destination.droppableId),
-        source,
-        destination
-      );
+  //     this.setState(state);
+  //   } else {
+  //     const result = move(
+  //       this.getList(source.droppableId),
+  //       this.getList(destination.droppableId),
+  //       source,
+  //       destination
+  //     );
 
-      this.setState({
-        items: result.droppable,
-        selected: result.droppable2
-      });
-    }
-  };
+  //     this.setState({
+  //       items: result.droppable,
+  //       selected: result.droppable2
+  //     });
+  //   }
+  // };
 
   addItemToInventory = (item) => {
     axios
@@ -136,7 +144,7 @@ class App extends Component {
                 </div>
               </Router> */}
               <hr />
-              <DragDropContext onDragEnd={this.onDragEnd}>
+              {/* <DragDropContext onDragEnd={this.onDragEnd}>
                 <Droppable droppableId="droppable">
                   {(provided, snapshot) => (
                     <div
@@ -160,8 +168,8 @@ class App extends Component {
                     </div>
                   )}
                 </Droppable>
-              </DragDropContext>
-              {/* <AssignedList items={this.state.items} /> */}
+              </DragDropContext> */}
+              <AssignedList items={this.state.items} />
             </header>
             <header className="activeColumn" id="activeColId">
               <h1>Active</h1>
@@ -172,7 +180,7 @@ class App extends Component {
                 </div>
               </Router> */}
               <hr />
-              <DragDropContext onDragEnd={this.onDragEnd}>
+              {/* <DragDropContext onDragEnd={this.onDragEnd}>
                 <Droppable droppableId="droppable">
                   {(provided, snapshot) => (
                     <div
@@ -196,8 +204,8 @@ class App extends Component {
                     </div>
                   )}
                 </Droppable>
-              </DragDropContext>
-              {/* <ActiveList items={this.state.items} /> */}
+              </DragDropContext> */}
+              <ActiveList items={this.state.items} />
             </header>
             <header className="reviewColumn" id="reviewColId">
               <h1>In Review</h1>
@@ -208,7 +216,7 @@ class App extends Component {
                 </div>
               </Router> */}
               <hr />
-              <DragDropContext onDragEnd={this.onDragEnd}>
+              {/* <DragDropContext onDragEnd={this.onDragEnd}>
                 <Droppable droppableId="droppable">
                   {(provided, snapshot) => (
                     <div
@@ -232,121 +240,15 @@ class App extends Component {
                     </div>
                   )}
                 </Droppable>
-              </DragDropContext>
-              {/* <ReviewList items={this.state.items} /> */}
+              </DragDropContext> */}
+              <ReviewList items={this.state.items} />
             </header>
           </div>
         </section>
-        <header className="formClass-header">
+        {/* <header className="formClass-header">
           <ItemForm addItem={this.addItemToInventory} />
-        </header>
+        </header> */}
       </div>
-    )
-  }
-}
-
-function AssignedList(props) {
-
-  let styles = {
-    backgroundColor: '#33cc33'
-  }
-
-  return props.items.filter((item) => {
-    return item.status === 'assigned'
-  }).map(item => {
-    return (<div className='listItem' key={item.id} style={styles}><Item name={item.name} status={item.status} /></div>)
-  })
-}
-
-function ActiveList(props) {
-
-  let styles = {
-    backgroundColor: '#627FEA'
-  }
-
-  return props.items.filter((item) => {
-    return item.status === 'active'
-  }).map(item => {
-    return (<div className='listItem' key={item.id} style={styles}><Item name={item.name} status={item.status} /></div>)
-  })
-}
-
-function ReviewList(props) {
-
-  let styles = {
-    backgroundColor: 'orange'
-  }
-
-  return props.items.filter((item) => {
-    return item.status === 'inReview'
-  }).map(item => {
-    return (<div className='listItem' key={item.id} style={styles}><Item name={item.name} status={item.status} /></div>)
-  })
-}
-
-function Item(props) {
-  // console.log('Item props: ', props)
-  return <div>{props.name} <br /><br />  {props.status}</div>
-}
-
-class ItemForm extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      name: null,
-      weight: null,
-      status: null
-    }
-  }
-
-  handleSubmit = (submit) => {
-    submit.preventDefault()
-    console.log('form submitted', this.state)
-    this.props.addItem(this.state)
-  }
-
-  handleChange = (field) => {
-    field.preventDefault()
-    // const { name, value } = field.target
-    // this.setState({
-    //   [name]: value
-    // })
-    axios
-      .post('http://localhost:8989/')
-      .then(items => {
-        console.log("items", items)
-        // const { name, value } = field.target
-        // this.setState({
-        //   [name]: value
-        // })
-      })
-      .catch(err => {
-        console.log('err', err)
-      })
-  }
-
-  render() {
-    return (
-      <form onSubmit={this.handleSubmit}>
-        <h1>Create Ticket</h1>
-        <label className="labelClass">
-          <input onChange={this.handleChange} type="text" name="name" placeholder="Name" />
-        </label>
-        <label>
-          <input onChange={this.handleChange} type="text" name="weight" placeholder="Weight" />
-        </label>
-        <label>
-          <input onChange={this.handleChange} type="text" name="status" placeholder="Status" />
-        </label>
-        {/* <label>
-          <select onChange={this.handleChange} name="status" placeholder="Type">
-            <option value="assigned">Assigned</option>
-            <option value="active">Active</option>
-            <option value="inReview">In Review</option>
-          </select>
-        </label> */}
-        <input type="submit" />
-      </form>
     )
   }
 }
