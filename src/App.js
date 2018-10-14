@@ -5,7 +5,7 @@ import './App.css';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import axios from 'axios';
 
-///////////////// DND
+///////////////// DND /////////////////
 
 
 // a little function to help us with reordering the result
@@ -34,7 +34,7 @@ const move = (source, destination, droppableSource, droppableDestination) => {
   return result;
 };
 
-///////////////// DND
+///////////////// DND /////////////////
 
 class App extends Component {
   constructor(props) {
@@ -50,6 +50,19 @@ class App extends Component {
   };
 
   getList = id => this.state[this.id2List[id]];
+
+  componentDidMount() {
+    axios
+      .get('http://localhost:8989/')
+      .then(items => {
+        // console.log("items", items)
+        this.setState({ items: items.data })
+        console.log(this.state.items)
+      })
+      .catch(err => {
+        console.log('err', err)
+      })
+  }
 
   onDragEnd = result => {
     const { source, destination } = result;
@@ -89,32 +102,19 @@ class App extends Component {
   };
 
   addItemToInventory = (item) => {
-    // axios
-    //   .get('/tickets')
-    //   .then(items => {
-    //     this.setState(state => {
-    //       return { items: [...state.items, item] }
-    //     })
-    //     console.log('items: ', items)
-    //   })
-    //   .catch(err => {
-    //     console.log('error: ', err)
-    //   })
-  }
-
-  componentDidMount() {
     axios
-      .get('http://localhost:8989/')
+      .post('http://localhost:8989/')
       .then(items => {
-        // console.log("items", items)
-        this.setState({ items: items.data })
-        console.log(this.state.items)
+        this.setState(state => {
+          return { items: [...state.items, item] }
+        })
+        console.log('items: ', items)
       })
       .catch(err => {
-        console.log('err', err)
+        console.log('error: ', err)
       })
-
   }
+
 
   render() {
 
@@ -125,68 +125,115 @@ class App extends Component {
           <h1>Kanban Board</h1>
         </header>
 
-        <DragDropContext onDragEnd={this.onDragEnd}>
-          <Droppable droppableId="droppable">
-            {(provided, snapshot) => (
-              <div
-                ref={provided.innerRef}
-              >
-                {this.state.items.map((item, index) => (
-                  <Draggable key={item.id} draggableId={item.id} index={index}>
-                    {(provided, snapshot) => (
-                      <div
-                        ref={provided.innerRef}
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                      >
-                        <AssignedList items={this.state.items} />
-                        {item.content}
-                      </div>
-                    )}
-                  </Draggable>
-                ))}
-                {provided.placeholder}
-              </div>
-            )}
-          </Droppable>
-        </DragDropContext>
-
-
-
         <section className="content">
           <div className="columns">
             <header className="assignedColumn" id="assignedColId">
               <h1>Assigned</h1>
-              <Router>
+              {/* <Router>
                 <div>
                   <Link className="App-title" to="/assigned">Show</Link>
                   <Route path="/assigned" component={() => <AssignedList items={this.state.items} />} />
                 </div>
-              </Router>
+              </Router> */}
               <hr />
-              <AssignedList items={this.state.items} />
+              <DragDropContext onDragEnd={this.onDragEnd}>
+                <Droppable droppableId="droppable">
+                  {(provided, snapshot) => (
+                    <div
+                      ref={provided.innerRef}
+                    >
+                      {this.state.items.map((item, index) => (
+                        <Draggable key={item.id} draggableId={item.id} index={index}>
+                          {(provided, snapshot) => (
+                            <div
+                              ref={provided.innerRef}
+                              {...provided.draggableProps}
+                              {...provided.dragHandleProps}
+                            >
+                              <AssignedList items={this.state.items} />
+                              {item.content}
+                            </div>
+                          )}
+                        </Draggable>
+                      ))}
+                      {provided.placeholder}
+                    </div>
+                  )}
+                </Droppable>
+              </DragDropContext>
+              {/* <AssignedList items={this.state.items} /> */}
             </header>
             <header className="activeColumn" id="activeColId">
               <h1>Active</h1>
-              <Router>
+              {/* <Router>
                 <div>
                   <Link className="App-title" to="/active">Show</Link>
                   <Route path="/active" component={() => <ActiveList items={this.state.items} />} />
                 </div>
-              </Router>
+              </Router> */}
               <hr />
-              <ActiveList items={this.state.items} />
+              <DragDropContext onDragEnd={this.onDragEnd}>
+                <Droppable droppableId="droppable">
+                  {(provided, snapshot) => (
+                    <div
+                      ref={provided.innerRef}
+                    >
+                      {this.state.items.map((item, index) => (
+                        <Draggable key={item.id} draggableId={item.id} index={index}>
+                          {(provided, snapshot) => (
+                            <div
+                              ref={provided.innerRef}
+                              {...provided.draggableProps}
+                              {...provided.dragHandleProps}
+                            >
+                              <ActiveList items={this.state.items} />
+                              {item.content}
+                            </div>
+                          )}
+                        </Draggable>
+                      ))}
+                      {provided.placeholder}
+                    </div>
+                  )}
+                </Droppable>
+              </DragDropContext>
+              {/* <ActiveList items={this.state.items} /> */}
             </header>
             <header className="reviewColumn" id="reviewColId">
               <h1>In Review</h1>
-              <Router>
+              {/* <Router>
                 <div>
                   <Link className="App-title" to="/review">Show</Link>
                   <Route path="/review" component={() => <ReviewList items={this.state.items} />} />
                 </div>
-              </Router>
+              </Router> */}
               <hr />
-              <ReviewList items={this.state.items} />
+              <DragDropContext onDragEnd={this.onDragEnd}>
+                <Droppable droppableId="droppable">
+                  {(provided, snapshot) => (
+                    <div
+                      ref={provided.innerRef}
+                    >
+                      {this.state.items.map((item, index) => (
+                        <Draggable key={item.id} draggableId={item.id} index={index}>
+                          {(provided, snapshot) => (
+                            <div
+                              ref={provided.innerRef}
+                              {...provided.draggableProps}
+                              {...provided.dragHandleProps}
+                            >
+                              <ReviewList items={this.state.items} />
+                              {item.content}
+                            </div>
+                          )}
+                        </Draggable>
+                      ))}
+                      {provided.placeholder}
+                    </div>
+                  )}
+                </Droppable>
+              </DragDropContext>
+              {/* <ReviewList items={this.state.items} /> */}
             </header>
           </div>
         </section>
@@ -207,7 +254,7 @@ function AssignedList(props) {
   return props.items.filter((item) => {
     return item.status === 'assigned'
   }).map(item => {
-    return (<div className='listItem' style={styles}><Item name={item.name} status={item.status} /></div>)
+    return (<div className='listItem' key={item.id} style={styles}><Item name={item.name} status={item.status} /></div>)
   })
 }
 
@@ -220,7 +267,7 @@ function ActiveList(props) {
   return props.items.filter((item) => {
     return item.status === 'active'
   }).map(item => {
-    return (<div className='listItem' style={styles}><Item name={item.name} status={item.status} /></div>)
+    return (<div className='listItem' key={item.id} style={styles}><Item name={item.name} status={item.status} /></div>)
   })
 }
 
@@ -233,7 +280,7 @@ function ReviewList(props) {
   return props.items.filter((item) => {
     return item.status === 'inReview'
   }).map(item => {
-    return (<div className='listItem' style={styles}><Item name={item.name} status={item.status} /></div>)
+    return (<div className='listItem' key={item.id} style={styles}><Item name={item.name} status={item.status} /></div>)
   })
 }
 
