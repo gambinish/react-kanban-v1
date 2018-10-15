@@ -12,6 +12,8 @@ import AssignedList from './Lists/AssignedList.jsx';
 import ActiveList from './Lists/ActiveList.jsx';
 import ReviewList from './Lists/ReviewList.jsx';
 
+import Item from './Lists/Item.jsx'
+
 class App extends Component {
   constructor(props) {
     super(props)
@@ -26,7 +28,7 @@ class App extends Component {
       .then(items => {
         // console.log("items", items)
         this.setState({ items: items.data })
-        console.log(this.state.items)
+        // console.log(this.state.items)
       })
       .catch(err => {
         console.log('err', err)
@@ -40,7 +42,7 @@ class App extends Component {
         this.setState(state => {
           return { items: [...state.items, item] }
         })
-        console.log('items: ', items)
+        // console.log('items: ', items)
       })
       .catch(err => {
         console.log('error: ', err)
@@ -136,25 +138,33 @@ class App extends Component {
                     <div
                       ref={provided.innerRef}
                     >
-                      {
-                        this.state.items
+                      { <ReviewList items={this.state.items} />}
+                        {/* this.state.items
                           .filter((item) => {
                             return item.status === 'inReview'
                           })
-                          .map((item, index) => (
-                            <Draggable key={item.id} draggableId={item.id} index={index}>
-                              {(provided, snapshot) => (
-                                <div
-                                  ref={provided.innerRef}
-                                  {...provided.draggableProps}
-                                  {...provided.dragHandleProps}
-                                >
-                                  <ReviewList items={this.state.items} />
-                                  {item.content}
-                                </div>
-                              )}
-                            </Draggable>
-                          ))
+                          .map(item => {
+                            return (
+                              <div>
+                                <ReviewList items={this.state.items} />
+                                <Item name={item.name} status={item.status} /> */}
+                              </div>
+                            )
+                          })
+                        // .map((item, index) => (
+                        //   <Draggable key={item.id} draggableId={item.id} index={index}>
+                        //     {(provided, snapshot) => (
+                        //       <div
+                        //         ref={provided.innerRef}
+                        //         {...provided.draggableProps}
+                        //         {...provided.dragHandleProps}
+                        //       >
+                        //         <ReviewList items={this.state.items} />
+                        //         {item.content}
+                        //       </div>
+                        //     )}
+                        //   </Draggable>
+                        // ))
                       }
                       {provided.placeholder}
                     </div>
