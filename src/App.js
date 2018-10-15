@@ -67,27 +67,8 @@ class App extends Component {
               <DragDropContext onDragEnd={this.onDragEnd}>
                 <Droppable droppableId="droppable">
                   {(provided, snapshot) => (
-                    <div
-                      ref={provided.innerRef}
-                    >
-                      {this.state.items
-                        .filter((item) => {
-                          return item.status === 'assigned'
-                        })
-                        .map((item, index) => (
-                          <Draggable key={item.id} draggableId={item.id} index={index}>
-                            {(provided, snapshot) => (
-                              <div
-                                ref={provided.innerRef}
-                                {...provided.draggableProps}
-                                {...provided.dragHandleProps}
-                              >
-                                <AssignedList items={this.state.items} />
-                                {item.content}
-                              </div>
-                            )}
-                          </Draggable>
-                        ))}
+                    <div ref={provided.innerRef}>
+                      <AssignedList items={this.state.items} />
                       {provided.placeholder}
                     </div>
                   )}
@@ -101,27 +82,8 @@ class App extends Component {
               <DragDropContext onDragEnd={this.onDragEnd}>
                 <Droppable droppableId="droppable">
                   {(provided, snapshot) => (
-                    <div
-                      ref={provided.innerRef}
-                    >
-                      {this.state.items
-                        .filter((item) => {
-                          return item.status === 'active'
-                        })
-                        .map((item, index) => (
-                          <Draggable key={item.id} draggableId={item.id} index={index}>
-                            {(provided, snapshot) => (
-                              <div
-                                ref={provided.innerRef}
-                                {...provided.draggableProps}
-                                {...provided.dragHandleProps}
-                              >
-                                <ActiveList items={this.state.items} />
-                                {item.content}
-                              </div>
-                            )}
-                          </Draggable>
-                        ))}
+                    <div ref={provided.innerRef}>
+                      <ActiveList items={this.state.items} />
                       {provided.placeholder}
                     </div>
                   )}
@@ -135,37 +97,8 @@ class App extends Component {
               <DragDropContext onDragEnd={this.onDragEnd}>
                 <Droppable droppableId="droppable">
                   {(provided, snapshot) => (
-                    <div
-                      ref={provided.innerRef}
-                    >
-                      { <ReviewList items={this.state.items} />}
-                        {/* this.state.items
-                          .filter((item) => {
-                            return item.status === 'inReview'
-                          })
-                          .map(item => {
-                            return (
-                              <div>
-                                <ReviewList items={this.state.items} />
-                                <Item name={item.name} status={item.status} /> */}
-                              </div>
-                            )
-                          })
-                        // .map((item, index) => (
-                        //   <Draggable key={item.id} draggableId={item.id} index={index}>
-                        //     {(provided, snapshot) => (
-                        //       <div
-                        //         ref={provided.innerRef}
-                        //         {...provided.draggableProps}
-                        //         {...provided.dragHandleProps}
-                        //       >
-                        //         <ReviewList items={this.state.items} />
-                        //         {item.content}
-                        //       </div>
-                        //     )}
-                        //   </Draggable>
-                        // ))
-                      }
+                    <div ref={provided.innerRef}>
+                      <ReviewList items={this.state.items} />
                       {provided.placeholder}
                     </div>
                   )}

@@ -1,7 +1,6 @@
 import React from 'react';
-// import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-
 
 import Item from './Item.jsx';
 
@@ -30,15 +29,15 @@ const ReviewList = (props) => {
                 style={styles}
                 className='listItem'
               >
-                {/* <Router>
+                <Router>
                   <div>
-                    <Link className="App-title" to="/assigned">Show</Link>
-                    <Route path="/assigned" component={() => <ReviewList items={this.state.items} />} />
+                    <Link className="App-title" to="/inReview">Show</Link>
+                    <Route path="/inReview" component={() => <ReviewList items={this.state.items} />} />
                   </div>
-                </Router> */}
+                </Router>
                 <Item key={item.id} name={item.name} status={item.status} />
                 {item.content}
-                {/* <button className='deleteBtn'>DELETE</button> */}
+                <button className='deleteBtn'>DELETE</button>
               </div>
             </div>
           )}
