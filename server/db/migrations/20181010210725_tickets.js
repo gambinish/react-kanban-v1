@@ -4,7 +4,7 @@ exports.up = function (knex, Promise) {
     knex.schema.createTable('ticketsTable', (table) => {
       table.increments('id').primary();
       table.string('name');
-      table.string('type');
+      table.integer('urgency');
       table.string('description');
       table.string('status')
       table.timestamp('created_at').defaultTo(knex.fn.now())
