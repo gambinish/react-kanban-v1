@@ -1,6 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import { Draggable } from 'react-beautiful-dnd';
 
 import Item from './Item.jsx';
 
@@ -15,29 +14,14 @@ const ReviewList = (props) => {
       return item.status === 'inReview'
     })
     .map((item, index) => {
-      console.log('props in inventory component', props)
       return (
 
         <Draggable key={item.id} draggableId={item.id} index={index} >
           {(provided, snapshot) => (
-            <div
-              ref={provided.innerRef}
-              {...provided.draggableProps}
-              {...provided.dragHandleProps}
-            >
-              <div
-                style={styles}
-                className='listItem'
-              >
-                <Router>
-                  <div>
-                    <Link className="App-title" to="/inReview">Show</Link>
-                    <Route path="/inReview" component={() => <ReviewList items={this.state.items} />} />
-                  </div>
-                </Router>
+            <div ref={provided.innerRef} {...provided.draggableProps}{...provided.dragHandleProps}>
+              <div style={styles} className='listItem'>
                 <Item key={item.id} name={item.name} status={item.status} />
                 {item.content}
-                <button className='deleteBtn'>DELETE</button>
               </div>
             </div>
           )}

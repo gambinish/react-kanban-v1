@@ -1,18 +1,17 @@
 import React, { Component } from 'react';
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import './App.css';
-// import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import axios from 'axios';
 
 
 ///////////////// IMPORT COMPONENTS //////////////
 
-import ItemForm from './Forms/ItemForm.jsx';
+import Header from './Partials/Header.jsx';
 import AssignedList from './Lists/AssignedList.jsx';
 import ActiveList from './Lists/ActiveList.jsx';
 import ReviewList from './Lists/ReviewList.jsx';
-
-import Item from './Lists/Item.jsx'
+// import Footer from './Partials/Footer.jsx';
+import ItemForm from './Forms/ItemForm.jsx';
 
 class App extends Component {
   constructor(props) {
@@ -26,9 +25,7 @@ class App extends Component {
     axios
       .get('http://localhost:8989/')
       .then(items => {
-        // console.log("items", items)
         this.setState({ items: items.data })
-        // console.log(this.state.items)
       })
       .catch(err => {
         console.log('err', err)
@@ -38,27 +35,22 @@ class App extends Component {
   addItemToInventory = (item) => {
     axios
       .post('http://localhost:8989/')
-      .then(items => {
+      .then(item => {
         this.setState(state => {
-          return { items: [...state.items, item] }
+          return { items: [...this.state.items, item] }
         })
-        // console.log('items: ', items)
       })
       .catch(err => {
         console.log('error: ', err)
       })
   }
 
-
   render() {
 
     return (
 
       <div className="App">
-        <header className="App-header">
-          <h1>Kanban Board</h1>
-        </header>
-
+        <Header items={this.state.items} />
         <section className="content">
           <div className="columns">
             <header className="assignedColumn" id="assignedColId">
@@ -74,7 +66,6 @@ class App extends Component {
                   )}
                 </Droppable>
               </DragDropContext>
-              {/* <AssignedList items={this.state.items} /> */}
             </header>
             <header className="activeColumn" id="activeColId">
               <h1>Active</h1>
@@ -89,7 +80,6 @@ class App extends Component {
                   )}
                 </Droppable>
               </DragDropContext>
-              {/* <ActiveList items={this.state.items} /> */}
             </header>
             <header className="reviewColumn" id="reviewColId">
               <h1>In Review</h1>
@@ -104,13 +94,12 @@ class App extends Component {
                   )}
                 </Droppable>
               </DragDropContext>
-              {/* <ReviewList items={this.state.items} /> */}
             </header>
           </div>
         </section>
-        <header className="formClass-header">
-          <ItemForm addItem={this.addItemToInventory} />
-        </header>
+        {/* <Footer /> */}
+        <ItemForm addItem={this.addItemToInventory} />
+        {/* <Footer /> */}
       </div>
     )
   }
