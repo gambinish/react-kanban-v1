@@ -34,7 +34,7 @@ class App extends Component {
 
   addItemToInventory = (item) => {
     axios
-      .post('http://localhost:8989/')
+      .post('http://localhost:8989/', item)
       .then(item => {
         this.setState(state => {
           return { items: [...this.state.items, item] }
