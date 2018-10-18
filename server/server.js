@@ -49,6 +49,24 @@ app.post('/', (req, res) => {
 
 })
 
+app.put('/delete', (req, res) => {
+  console.log('SERVER DELETE "/delete" : ', req.body)
+  // console.log('SERVER DELETE RES: ', res)
+  const id = req.body.id
+  console.log('DELETE ID: ', id)
+  console.log('typeof DELETE ID: ', typeof id)
+  Tickets
+    .where({ id })
+    .destroy()
+    .then(items => {
+      res.json(items.serialize())
+    })
+    .catch(err => {
+      console.log('DELETE ERR: ', err)
+    })
+
+})
+
 app.listen(PORT, () => {
   console.log(`Listening on ${PORT}...`)
 })

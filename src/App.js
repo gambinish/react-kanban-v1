@@ -21,11 +21,14 @@ class App extends Component {
     }
   }
 
+
   componentDidMount() {
     axios
       .get('http://localhost:8989/')
       .then(items => {
         this.setState({ items: items.data })
+        // console.log('items.data', this.state)
+        // console.log('App this.state.items: ', this.state.items)
       })
       .catch(err => {
         console.log('err', err)
@@ -43,6 +46,25 @@ class App extends Component {
       .catch(err => {
         console.log('error: ', err)
       })
+  }
+
+  removeItemFromInventory = (item) => {
+    console.log('removeItemFromInventory: ', item)
+    // console.log('props ItemFromInventoryID: ')
+    axios
+      .put('http://localhost:8989/delete', item)
+      .then(item => {
+        console.log('RMFI log', item)
+        // this.setState(state => {
+        //   return { items: [...this.state.items] }
+        //   // console.log('RMFI response: ', item)
+        // })
+      })
+      .catch(err => {
+        console.log('delete error: ', err)
+      })
+
+
   }
 
   render() {
@@ -88,7 +110,7 @@ class App extends Component {
                 <Droppable droppableId="droppable">
                   {(provided, snapshot) => (
                     <div ref={provided.innerRef}>
-                      <ReviewList items={this.state.items} />
+                      <ReviewList sendData={this.removeItemFromInventory} items={this.state.items} />
                       {provided.placeholder}
                     </div>
                   )}

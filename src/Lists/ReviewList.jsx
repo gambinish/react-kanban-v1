@@ -4,8 +4,6 @@ import { Draggable } from 'react-beautiful-dnd';
 
 import Item from './Item.jsx';
 
-// const ReviewList = (props) => {
-
 let styles = {
   backgroundColor: 'orange'
 }
@@ -13,16 +11,25 @@ let styles = {
 class ReviewList extends Component {
   constructor(props) {
     super(props)
+    this.state = {
+      id: null,
+      name: null,
+      status: null
+    }
   }
 
-
-
-  handleDelete = (e) => {
+  handleDelete = (item) => {
     // e.preventDefault();
-    console.log('DELETE BUTTON', this.props)
+    // this.setState({item.name} {item.status)
+    this.state.status = item.status
+    this.state.status = item.name
+    this.state.id = item.id
+    // console.log('ReviewList ID', this.props)
+    // console.log('DELETE BUTTON: ', item)
+    // console.log('this.state from ReviewList', this.state)
+    this.props.sendData(this.state)
 
   }
-
 
   render() {
 
@@ -37,9 +44,9 @@ class ReviewList extends Component {
             {(provided, snapshot) => (
               <div ref={provided.innerRef} {...provided.draggableProps}{...provided.dragHandleProps}>
                 <div style={styles} className='listItem'>
-                  <Item sendData={this.handleDelete} key={item.id} name={item.name} status={item.status} />
+                  <Item sendData={this.handleDelete} id={item.id} key={item.id} name={item.name} status={item.status} />
                   {item.content}
-                  <button onClick={this.handleDelete} className='deleteBtn'>DELETE</button>
+                  {/* <button onClick={this.handleDelete} className='deleteBtn'>AGAIN</button> */}
                 </div>
               </div>
             )}
@@ -48,65 +55,7 @@ class ReviewList extends Component {
         )
       })
   }
-
-
-
-
-
-
-
-
 }
-// }
-
-// class ReviewList extends Component {
-//   constructor(props) {
-//     super(props)
-
-//   }
-// }
-
-// this.handleDelete = this.handleDelete.bind(this);
-
-// let handleDelete = (e) => {
-//   // e.preventDefault();
-//   console.log('DELETE BUTTON', this.props)
-
-// }
-
-// let styles = {
-//   backgroundColor: 'orange'
-// }
-
-// render() {
-
-// }
-
-
-// render() {
-//   return props.items
-//     .filter((item) => {
-//       return item.status === 'inReview'
-//     })
-//     .map((item, index) => {
-//       return (
-
-//         <Draggable key={item.id} draggableId={item.id} index={index} >
-//           {(provided, snapshot) => (
-//             <div ref={provided.innerRef} {...provided.draggableProps}{...provided.dragHandleProps}>
-//               <div style={styles} className='listItem'>
-//                 <Item sendData={handleDelete} key={item.id} name={item.name} status={item.status} />
-//                 {item.content}
-//                 <button onClick={handleDelete} className='deleteBtn'>DELETE</button>
-//               </div>
-//             </div>
-//           )}
-//         </Draggable>
-
-//       )
-//     })
-// }
-
 
 
 export default ReviewList;
