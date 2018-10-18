@@ -7,14 +7,10 @@ const bodyParser = require('body-parser')
 
 const Tickets = require('./db/models/Tickets.js')
 
-
 app.use(cors())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
-
-
 app.use(express.static(path.join(__dirname, '../build')))
-
 
 app.get('/', (req, res) => {
 
@@ -30,7 +26,7 @@ app.get('/', (req, res) => {
 })
 
 app.post('/', (req, res) => {
-  console.log('SERVER POST "/" : ', req.body)
+
   const item = req.body
 
   Tickets
@@ -41,7 +37,6 @@ app.post('/', (req, res) => {
     })
     .then(items => {
       res.json(items.serialize())
-      // console.log('items after post: ', updatedList)
     })
     .catch(err => {
       console.log('err: ', err)
@@ -50,11 +45,9 @@ app.post('/', (req, res) => {
 })
 
 app.put('/delete', (req, res) => {
-  console.log('SERVER DELETE "/delete" : ', req.body)
-  // console.log('SERVER DELETE RES: ', res)
+
   const id = req.body.id
-  console.log('DELETE ID: ', id)
-  console.log('typeof DELETE ID: ', typeof id)
+
   Tickets
     .where({ id })
     .destroy()

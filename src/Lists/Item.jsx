@@ -1,4 +1,3 @@
-// import React from 'react';
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
@@ -12,12 +11,8 @@ class Item extends Component {
     }
   }
 
-
-
   handleClick = (e) => {
     e.preventDefault();
-    // console.log('DELETE BUTTON ITEM.jsx', this.state)
-    // console.log('item this.props', this.state)
     this.props.sendData(this.state)
   }
 

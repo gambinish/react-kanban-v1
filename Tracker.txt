@@ -1,0 +1,7 @@
+# Refactor other 'List' components to reflect 'delete' route
+# Hook up redux
+# Add 'Urgency' animation meter
+# Scroll Bar
+# Add detail route
+# Refactor DB
+# Make page updates instantaneous

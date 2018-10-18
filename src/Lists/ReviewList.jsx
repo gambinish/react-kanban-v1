@@ -1,4 +1,3 @@
-// import React from 'react';
 import React, { Component } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
 
@@ -19,14 +18,13 @@ class ReviewList extends Component {
   }
 
   handleDelete = (item) => {
-    // e.preventDefault();
-    // this.setState({item.name} {item.status)
+
+    // NEED TO REFACTOR TO: setState()
+
     this.state.status = item.status
-    this.state.status = item.name
+    this.state.name = item.name
     this.state.id = item.id
-    // console.log('ReviewList ID', this.props)
-    // console.log('DELETE BUTTON: ', item)
-    // console.log('this.state from ReviewList', this.state)
+
     this.props.sendData(this.state)
 
   }
@@ -46,7 +44,6 @@ class ReviewList extends Component {
                 <div style={styles} className='listItem'>
                   <Item sendData={this.handleDelete} id={item.id} key={item.id} name={item.name} status={item.status} />
                   {item.content}
-                  {/* <button onClick={this.handleDelete} className='deleteBtn'>AGAIN</button> */}
                 </div>
               </div>
             )}
