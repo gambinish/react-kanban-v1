@@ -43,6 +43,7 @@ const initialState = [{
 
 export const GET_ALL_ITEMS = 'GET_ALL_ITEMS';
 export const ADD_ITEM = 'ADD_ITEM';
+export const REMOVE_ITEM = 'REMOVE_ITEM';
 
 export const getAllItems = () => {
   return {
@@ -55,6 +56,13 @@ export const addItem = (item) => {
   console.log('ACTION: addItem: ', item)
   return {
     type: ADD_ITEM,
+    payload: item
+  }
+}
+
+export const removeItem = (item) => {
+  return {
+    type: REMOVE_ITEM,
     payload: item
   }
 }

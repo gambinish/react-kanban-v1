@@ -15,17 +15,18 @@ class ActiveList extends Component {
     this.state = {
       id: null,
       name: null,
-      status: null
+      status: null,
+      description: null,
+      type: null
     }
   }
 
   handleDelete = (item) => {
 
     // NEED TO REFACTOR TO: setState()
-
-    this.state.status = item.status
-    this.state.name = item.name
-    this.state.id = item.id
+    this.setState(state => {
+      return item
+    })
 
     this.props.sendData(this.state)
 
@@ -44,7 +45,7 @@ class ActiveList extends Component {
             {(provided, snapshot) => (
               <div ref={provided.innerRef} {...provided.draggableProps}{...provided.dragHandleProps}>
                 <div style={styles} className='listItem'>
-                  <Item sendData={this.handleDelete} id={item.id} key={item.id} name={item.name} status={item.status} />
+                  <Item sendData={this.handleDelete} key={item.id} id={item.id} name={item.name} status={item.status} description={item.description} type={item.type} />
                   {item.content}
                 </div>
               </div>

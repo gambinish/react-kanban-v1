@@ -15,17 +15,18 @@ class ReviewList extends Component {
     this.state = {
       id: null,
       name: null,
-      status: null
+      status: null,
+      description: null,
+      type: null
     }
   }
 
   handleDelete = (item) => {
 
     // NEED TO REFACTOR TO: setState()
-
-    this.state.status = item.status
-    this.state.name = item.name
-    this.state.id = item.id
+    this.setState(state => {
+      return item
+    })
 
     this.props.sendData(this.state)
 

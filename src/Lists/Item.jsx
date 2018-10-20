@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
-// import { connect } from 'react-redux';
+import { connect } from 'react-redux';
+
+import { removeItem } from '../actions/actions.js'
 
 class Item extends Component {
   constructor(props) {
@@ -9,14 +11,16 @@ class Item extends Component {
     this.state = {
       id: this.props.id,
       name: this.props.name,
-      status: this.props.status
+      status: this.props.status,
+      type: this.props.type,
+      description: this.props.description
     }
-    // console.log('props in item component', props)
   }
 
   handleClick = (e) => {
     e.preventDefault();
-    this.props.sendData(this.state)
+    // dispatch action to remove item from redux store
+    this.props.dispatch(removeItem(this.state))
   }
 
 
@@ -47,4 +51,6 @@ class Item extends Component {
 
 // export default connect(mapStateToProps)(Item)
 
-export default Item
+export default connect()(Item)
+
+// export default Item

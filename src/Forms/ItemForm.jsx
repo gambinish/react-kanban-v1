@@ -8,6 +8,7 @@ class ItemForm extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      id: null,
       name: null,
       type: null,
       description: null,
@@ -18,12 +19,9 @@ class ItemForm extends Component {
   }
 
   handleSubmit(e) {
-    //preRedux:
-    // e.preventDefault();
-    // console.log('this.state submission:', this.state)
-    // this.props.addItem(this.state)
     e.preventDefault();
-    console.log('this.state submission:', this.state)
+    // dispatch action to add item into redux store
+    console.log('HANDLE SUBMIT: ', this.state)
     this.props.dispatch(addItem(this.state))
   }
 
