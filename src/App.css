@@ -1,5 +1,8 @@
 .App {
-  text-align: center;
+  min-height: 100vh;
+  background: #ccc;
+  display: flex;
+  flex-direction: column;
 }
 
 .App-logo {
@@ -7,11 +10,55 @@
   height: 80px;
 }
 
-.App-header {
+.App-header, .formClass-header {
   background-color: #222;
   height: 75px;
   padding: 20px;
+  text-align: center;
   color: white;
+}
+
+.content {
+  display: flex;
+  flex: 1;
+  background: #999;
+  color: #000; 
+}
+
+.columns{
+  display: flex;
+  flex:1;
+}
+
+.assignedColumn{
+  flex: 1;
+  background: #ccc;
+  text-align: center;
+  order: 1;
+}
+
+.activeColumn{
+  flex: 1;
+  background: #eee;
+  text-align: center;
+  order: 2;
+}
+
+.reviewColumn{ 
+  flex: 1;
+  background: #ddd;
+  text-align: center;
+  order: 3;
+}
+
+.listItem {
+  border: solid black 2px;
+  border-radius: 25px;
+  margin: auto;
+  margin-top: 2.5px;
+  margin-bottom: 2.5px;
+  width: 50%;
+  padding: 5px;
 }
 
 .App-title {
@@ -20,6 +67,23 @@
 
 .App-intro {
   font-size: large;
+}
+
+.ItemList-header {
+  background-color: tomato;
+}
+
+.formClass-header {
+  background-color: cornflowerblue;
+  height: auto;
+  padding: 0.5em;
+  align-content: center;
+}
+
+hr {
+  border: 0;
+  height: 1px;
+  background: #333;
 }
 
 @keyframes App-logo-spin {
