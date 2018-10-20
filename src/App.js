@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import './App.css';
-// import axios from 'axios';
 
 import Header from './Partials/Header.jsx';
 import AssignedList from './Lists/AssignedList.jsx';
 import ActiveList from './Lists/ActiveList.jsx';
 import ReviewList from './Lists/ReviewList.jsx';
-// import Footer from './Partials/Footer.jsx';
 import ItemForm from './Forms/ItemForm.jsx';
 import { getAllItems, removeItem } from './actions/actions.js'
+// import Footer from './Partials/Footer.jsx'; -> NEED TO REFACTOR
 
 import { connect } from 'react-redux';
 
@@ -23,7 +22,6 @@ class App extends Component {
 
   componentDidMount() {
 
-    // dispatch action to fetch all data from redux store
     this.props.dispatch(getAllItems())
 
   }
@@ -95,7 +93,5 @@ class App extends Component {
   }
 }
 
-
-// connect()(App)
 
 export default connect()(App);

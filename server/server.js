@@ -12,6 +12,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.static(path.join(__dirname, '../build')))
 
+
 app.get('/', (req, res) => {
 
   Tickets
@@ -24,6 +25,7 @@ app.get('/', (req, res) => {
     })
 
 })
+
 
 app.post('/', (req, res) => {
 
@@ -45,6 +47,7 @@ app.post('/', (req, res) => {
 
 })
 
+
 app.put('/delete', (req, res) => {
 
   const id = req.body.id
@@ -61,6 +64,7 @@ app.put('/delete', (req, res) => {
     })
 
 })
+
 
 app.listen(PORT, () => {
   console.log(`Listening on ${PORT}...`)

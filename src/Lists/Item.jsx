@@ -18,10 +18,10 @@ class Item extends Component {
   }
 
   handleClick = (e) => {
+
     e.preventDefault();
-    // dispatch action to remove item from redux store
     this.props.dispatch(removeItem(this.state))
-    console.log('button event', this.state)
+
   }
 
 
@@ -45,5 +45,3 @@ class Item extends Component {
 
 
 export default connect()(Item)
-
-// export default Item

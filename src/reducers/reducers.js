@@ -8,10 +8,7 @@ const itemReducer = (state = [], action) => {
     case ADD_ITEM:
       return [...state, action.payload]
     case REMOVE_ITEM:
-      // set current state to local variable 'newState'
       return [...state, action.payload];
-    // console.log('REMOVE_ITEM REDUCER action.payload: ', action.payload)
-    // return [...state, action.payload]
     default:
       return state
 

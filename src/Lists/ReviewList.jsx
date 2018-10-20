@@ -23,7 +23,6 @@ class ReviewList extends Component {
 
   handleDelete = (item) => {
 
-    // NEED TO REFACTOR TO: setState()
     this.setState(state => {
       return item
     })

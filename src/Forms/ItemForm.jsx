@@ -18,13 +18,14 @@ class ItemForm extends Component {
   }
 
   handleSubmit(e) {
+
     e.preventDefault();
-    // dispatch action to add item into redux store
-    console.log('HANDLE SUBMIT: ', this.state)
     this.props.dispatch(addItem(this.state))
+
   }
 
   handleChange(e) {
+
     e.preventDefault();
     const target = e.target
     const value = target.value;
@@ -32,6 +33,7 @@ class ItemForm extends Component {
     this.setState({
       [name]: value
     })
+
   }
 
   render() {

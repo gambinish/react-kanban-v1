@@ -1,5 +1,5 @@
 import React from 'react';
-import ItemForm from '../Forms/ItemForm.jsx'
+// import ItemForm from '../Forms/ItemForm.jsx'
 
 const Footer = () =>
   <div>

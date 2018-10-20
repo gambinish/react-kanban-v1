@@ -15,10 +15,11 @@ export const getAllItems = () => {
         dispatch({ type: 'DISPALY_ERROR_NOTIFICATION' })
       })
   }
+
 }
 
 export const addItem = (item) => {
-  console.log('ACTION: addItem: ', item)
+
   return dispatch => {
     axios.post('http://localhost:8989/', item)
       .then(response => {
@@ -33,7 +34,7 @@ export const addItem = (item) => {
 }
 
 export const removeItem = (item) => {
-  console.log('ACTION: removeItem: ', item)
+
   return dispatch => {
     axios.put('http://localhost:8989/delete', item)
       .then(item => {
@@ -44,4 +45,5 @@ export const removeItem = (item) => {
         console.log('REMOVE ITEM ACTION ERROR: ', err)
       })
   }
+
 }
