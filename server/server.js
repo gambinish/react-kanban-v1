@@ -57,7 +57,7 @@ app.put('/delete', (req, res) => {
     .where({ id })
     .destroy()
     .then(items => {
-      res.json(items.serialize())
+      res.json(id)
     })
     .catch(err => {
       console.log('DELETE ERR: ', err)

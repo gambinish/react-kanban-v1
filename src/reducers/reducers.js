@@ -8,7 +8,11 @@ const itemReducer = (state = [], action) => {
     case ADD_ITEM:
       return [...state, action.payload]
     case REMOVE_ITEM:
-      return [...state, action.payload];
+      let id = action.payload
+      let arr = state.filter(e => {
+        return e.id !== id;
+      })
+      return arr;
     default:
       return state
 
