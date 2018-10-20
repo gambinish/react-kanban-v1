@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
+// import { connect } from 'react-redux';
+
 class Item extends Component {
   constructor(props) {
     super(props)
@@ -9,12 +11,14 @@ class Item extends Component {
       name: this.props.name,
       status: this.props.status
     }
+    // console.log('props in item component', props)
   }
 
   handleClick = (e) => {
     e.preventDefault();
     this.props.sendData(this.state)
   }
+
 
   render() {
     return (
@@ -34,5 +38,13 @@ class Item extends Component {
   }
 }
 
+// const mapStateToProps = state => {
+//   return {
+//     items: state,
+//     lol: 'testing redux prop'
+//   }
+// }
+
+// export default connect(mapStateToProps)(Item)
 
 export default Item

@@ -3,6 +3,9 @@ import { Draggable } from 'react-beautiful-dnd';
 
 import Item from './Item.jsx';
 
+import { connect } from 'react-redux';
+
+
 let styles = {
   backgroundColor: '#627FEA'
 }
@@ -54,4 +57,12 @@ class ActiveList extends Component {
   }
 }
 
-export default ActiveList;
+const mapStateToProps = state => {
+  return {
+    items: state,
+  }
+}
+
+export default connect(mapStateToProps)(ActiveList)
+
+// export default ActiveList;

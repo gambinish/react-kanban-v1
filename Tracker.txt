@@ -1,4 +1,4 @@
-# Refactor other 'List' components to reflect 'delete' route
+# Refactor Form to pass data through Footer component
 # Hook up redux
 # Add 'Urgency' animation meter
 # Scroll Bar

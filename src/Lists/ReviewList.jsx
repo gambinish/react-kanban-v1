@@ -3,6 +3,8 @@ import { Draggable } from 'react-beautiful-dnd';
 
 import Item from './Item.jsx';
 
+import { connect } from 'react-redux';
+
 let styles = {
   backgroundColor: 'orange'
 }
@@ -54,5 +56,10 @@ class ReviewList extends Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    items: state
+  }
+}
 
-export default ReviewList;
+export default connect(mapStateToProps)(ReviewList)

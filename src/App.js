@@ -9,6 +9,10 @@ import ActiveList from './Lists/ActiveList.jsx';
 import ReviewList from './Lists/ReviewList.jsx';
 // import Footer from './Partials/Footer.jsx';
 import ItemForm from './Forms/ItemForm.jsx';
+import { getAllItems } from './actions/actions.js'
+// import { itemReducer } from './reducers/reducers.js'
+
+import { connect } from 'react-redux';
 
 class App extends Component {
   constructor(props) {
@@ -19,16 +23,21 @@ class App extends Component {
   }
 
   componentDidMount() {
+    // PRE REDUX:
+    // axios
+    //   .get('http://localhost:8989/')
+    //   .then(items => {
+    //     this.setState({ items: items.data })
+    //     console.log(this.state)
+    //   })
+    //   .catch(err => {
+    //     console.log('err', err)
+    //   })
 
-    axios
-      .get('http://localhost:8989/')
-      .then(items => {
-        this.setState({ items: items.data })
-      })
-      .catch(err => {
-        console.log('err', err)
-      })
-
+    // REDUX:
+    console.log('this.props: ', this.props)
+    this.props.dispatch(getAllItems())
+    // this.props.dispatch({ type: 'HELLO' })
   }
 
   addItemToInventory = (item) => {
@@ -119,4 +128,7 @@ class App extends Component {
   }
 }
 
-export default App;
+
+// connect()(App)
+
+export default connect()(App);

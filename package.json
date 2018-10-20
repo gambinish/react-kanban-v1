@@ -15,9 +15,12 @@
     "react": "^16.5.2",
     "react-beautiful-dnd": "^9.0.2",
     "react-dom": "^16.5.2",
+    "react-redux": "^5.0.7",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.0.4",
-    "react-trello": "^2.0.1"
+    "react-trello": "^2.0.1",
+    "redux": "^4.0.1",
+    "redux-thunk": "^2.3.0"
   },
   "scripts": {
     "migrate": "POSTGRES_HOSTNAME=localhost POSTGRES_CONTAINER_PORT=8765 npx knex --knexfile ./server/knexfile.js migrate:latest",
