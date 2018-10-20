@@ -52,6 +52,7 @@ export const getAllItems = () => {
 }
 
 export const addItem = (item) => {
+  console.log('ACTION: addItem: ', item)
   return {
     type: ADD_ITEM,
     payload: item

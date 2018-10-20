@@ -5,7 +5,6 @@ import Item from './Item.jsx';
 
 import { connect } from 'react-redux';
 
-
 let styles = {
   backgroundColor: '#627FEA'
 }
