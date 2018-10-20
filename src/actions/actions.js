@@ -1,68 +1,47 @@
-const initialState = [{
-  id: 200,
-  name: 'redux-1',
-  type: 'redux-type-1',
-  description: 'redux-description-1',
-  status: 'assigned'
-},
-{
-  id: 202,
-  name: 'redux-1.5',
-  type: 'redux-type-1.5',
-  description: 'redux-description-1.5',
-  status: 'assigned'
-},
-{
-  id: 203,
-  name: 'redux-2',
-  type: 'redux-type-2',
-  description: 'redux-description-2',
-  status: 'active'
-},
-{
-  id: 204,
-  name: 'redux-2.5',
-  type: 'redux-type-2.5',
-  description: 'redux-description-2.5',
-  status: 'active'
-},
-{
-  id: 205,
-  name: 'redux-3',
-  type: 'redux-type-3',
-  description: 'redux-description-3',
-  status: 'inReview'
-},
-{
-  id: 206,
-  name: 'redux-3.5',
-  type: 'redux-type-3.5',
-  description: 'redux-description-3.5',
-  status: 'inReview'
-}]
+import axios from 'axios';
 
 export const GET_ALL_ITEMS = 'GET_ALL_ITEMS';
 export const ADD_ITEM = 'ADD_ITEM';
 export const REMOVE_ITEM = 'REMOVE_ITEM';
 
 export const getAllItems = () => {
-  return {
-    type: GET_ALL_ITEMS,
-    payload: initialState
+
+  return dispatch => {
+    axios.get('http://localhost:8989/')
+      .then(response => {
+        dispatch({ type: GET_ALL_ITEMS, payload: response.data })
+      })
+      .catch(err => {
+        dispatch({ type: 'DISPALY_ERROR_NOTIFICATION' })
+      })
   }
 }
 
 export const addItem = (item) => {
   console.log('ACTION: addItem: ', item)
-  return {
-    type: ADD_ITEM,
-    payload: item
+  return dispatch => {
+    axios.post('http://localhost:8989/', item)
+      .then(response => {
+        console.log('ADD ITEM ACTION RESPONSE: ', response.data)
+        dispatch({ type: GET_ALL_ITEMS, payload: response.data })
+      })
+      .catch(err => {
+        console.log('ADD ITEM ACTION ERROR: ', err)
+      })
   }
+
 }
 
 export const removeItem = (item) => {
-  return {
-    type: REMOVE_ITEM,
-    payload: item
+  console.log('ACTION: removeItem: ', item)
+  return dispatch => {
+    axios.put('http://localhost:8989/delete', item)
+      .then(item => {
+        console.log('REMOVE ITEM ACTION RESPONSE: ', item)
+        dispatch({ type: REMOVE_ITEM, payload: item.data })
+      })
+      .catch(err => {
+        console.log('REMOVE ITEM ACTION ERROR: ', err)
+      })
   }
 }

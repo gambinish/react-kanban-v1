@@ -28,6 +28,7 @@ app.get('/', (req, res) => {
 app.post('/', (req, res) => {
 
   const item = req.body
+  console.log('SERVER POST: ', item)
 
   Tickets
     .forge(item)
@@ -47,6 +48,7 @@ app.post('/', (req, res) => {
 app.put('/delete', (req, res) => {
 
   const id = req.body.id
+  console.log('SERVER DELETE: ', req.body)
 
   Tickets
     .where({ id })

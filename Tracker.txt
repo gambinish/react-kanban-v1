@@ -1,7 +1,6 @@
-# Refactor Form to pass data through Footer component
-# Hook up redux
+# Account for async funcion on delete action
+# Refactor Form to pass data through styled Footer component
 # Add 'Urgency' animation meter
 # Scroll Bar
 # Add detail route
 # Refactor DB
-# Make page updates instantaneous

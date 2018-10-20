@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import './App.css';
-import axios from 'axios';
+// import axios from 'axios';
 
 import Header from './Partials/Header.jsx';
 import AssignedList from './Lists/AssignedList.jsx';
@@ -10,7 +10,6 @@ import ReviewList from './Lists/ReviewList.jsx';
 // import Footer from './Partials/Footer.jsx';
 import ItemForm from './Forms/ItemForm.jsx';
 import { getAllItems, removeItem } from './actions/actions.js'
-// import { itemReducer } from './reducers/reducers.js'
 
 import { connect } from 'react-redux';
 
@@ -23,35 +22,14 @@ class App extends Component {
   }
 
   componentDidMount() {
+
     // dispatch action to fetch all data from redux store
     this.props.dispatch(getAllItems())
-  }
-
-  addItemToInventory = (item) => {
-
-    axios
-      .post('http://localhost:8989/', item)
-      .then(item => {
-        this.setState(state => {
-          return { items: [...this.state.items, item] }
-        })
-      })
-      .catch(err => {
-        console.log('error: ', err)
-      })
 
   }
+
 
   removeItemFromInventory = (item) => {
-
-    // axios
-    //   .put('http://localhost:8989/delete', item)
-    //   .then(item => {
-    //     console.log('RMFI log', item)
-    //   })
-    //   .catch(err => {
-    //     console.log('delete error: ', err)
-    //   })
 
     this.props.dispatch(removeItem(item))
 

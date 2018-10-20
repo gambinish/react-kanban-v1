@@ -21,6 +21,7 @@ class Item extends Component {
     e.preventDefault();
     // dispatch action to remove item from redux store
     this.props.dispatch(removeItem(this.state))
+    console.log('button event', this.state)
   }
 
 
@@ -42,14 +43,6 @@ class Item extends Component {
   }
 }
 
-// const mapStateToProps = state => {
-//   return {
-//     items: state,
-//     lol: 'testing redux prop'
-//   }
-// }
-
-// export default connect(mapStateToProps)(Item)
 
 export default connect()(Item)
 

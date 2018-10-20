@@ -8,7 +8,6 @@ class ItemForm extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      id: null,
       name: null,
       type: null,
       description: null,
@@ -32,8 +31,6 @@ class ItemForm extends Component {
     const name = target.name;
     this.setState({
       [name]: value
-    }, () => {
-      console.log('state on submit: ', this.state)
     })
   }
 
@@ -68,8 +65,5 @@ class ItemForm extends Component {
   }
 }
 
-// export default connect(mapStateToProps)(ItemForm)
 
 export default connect()(ItemForm)
-
-// export default ItemForm
